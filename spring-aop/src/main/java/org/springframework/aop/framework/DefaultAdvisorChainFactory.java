@@ -50,10 +50,22 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 	@Override
 	public List<Object> getInterceptorsAndDynamicInterceptionAdvice(
 			Advised config, Method method, @Nullable Class<?> targetClass) {
-
+		/**
+		 * 实例化DefaultAdvisorAdapterRegistry，此处使用了饿汉式的【单例设计模式】。
+		 *
+		 * 实例化过程中，会去初始化三个增强器的适配器
+		 *
+		 * 初始化的三个增强器适配器：
+		 * （1）MethodBeforeAdviceAdapter
+		 * （2）AfterReturningAdviceAdapter
+		 * （3）ThrowsAdviceAdapter
+		 */
 		// This is somewhat tricky... We have to process introductions first,
 		// but we need to preserve order in the ultimate list.
+
+		// 用来保存最终的拦截器链的List，长度和增强器个数相同.
 		List<Object> interceptorList = new ArrayList<Object>(config.getAdvisors().length);
+		// 被增强的类的真实Class类型
 		Class<?> actualClass = (targetClass != null ? targetClass : method.getDeclaringClass());
 		boolean hasIntroductions = hasMatchingIntroductions(config, actualClass);
 		AdvisorAdapterRegistry registry = GlobalAdvisorAdapterRegistry.getInstance();
@@ -64,6 +76,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 				PointcutAdvisor pointcutAdvisor = (PointcutAdvisor) advisor;
 				if (config.isPreFiltered() || pointcutAdvisor.getPointcut().getClassFilter().matches(actualClass)) {
 					MethodMatcher mm = pointcutAdvisor.getPointcut().getMethodMatcher();
+					/** 根据增强器去获取增强器对应的方法拦截器，registry的默认实现类为：DefaultAdvisorAdapterRegistry */
 					if (MethodMatchers.matches(mm, method, actualClass, hasIntroductions)) {
 						MethodInterceptor[] interceptors = registry.getInterceptors(advisor);
 						if (mm.isRuntime()) {

@@ -1,13 +1,14 @@
-package tuling;
+package tuling.aspect;
 
 
 import org.springframework.aop.framework.AopContext;
+import tuling.Calculate;
 
 
 /**
  * Created by smlz on 2019/6/10.
  */
-public class TulingCalculate implements Calculate{
+public class TulingCalculate implements Calculate {
 
 
     public int add(int numA, int numB) {

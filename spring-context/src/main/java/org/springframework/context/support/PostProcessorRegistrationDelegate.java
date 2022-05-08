@@ -66,6 +66,8 @@ final class PostProcessorRegistrationDelegate {
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 
 		//第一步:首先调用BeanDefinitionRegistryPostProcessor的后置处理器
+
+		//用于判断后置处理器是否执行过
 		Set<String> processedBeans = new HashSet<>();
 
 		//判断我们的beanFacotry实现了BeanDefinitionRegistry
@@ -77,7 +79,7 @@ final class PostProcessorRegistrationDelegate {
 			//保存BeanDefinitionRegistryPostProcessor类型的后置处理器
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
-			//循环我们传递进来的beanFactoryPostProcessors
+			//循环我们传递进来的beanFactoryPostProcessors，这部分未传没值
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				//判断我们的后置处理器是不是BeanDefinitionRegistryPostProcessor
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
@@ -181,8 +183,8 @@ final class PostProcessorRegistrationDelegate {
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
 		}
 
-		else { //若当前的beanFacotory没有实现了BeanDefinitionRegistry 直接电泳
-			 //直接电泳beanFacotoryPostProcessor接口的方法进行后置处理
+		else { //若当前的beanFacotory没有实现了BeanDefinitionRegistry 直接调用
+			 //直接调用beanFacotoryPostProcessor接口的方法进行后置处理
 			invokeBeanFactoryPostProcessors(beanFactoryPostProcessors, beanFactory);
 		}
 

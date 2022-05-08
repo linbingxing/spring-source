@@ -1905,7 +1905,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object wrappedBean = bean;
 		if (mbd == null || !mbd.isSynthetic()) {
-			//调用我们的bean的后置处理器的postProcessorsBeforeInitialization方法  @PostCust注解的方法
+			//todo 后续需要了解
+			//调用我们的bean的后置处理器的postProcessorsBeforeInitialization方法  @PostCust注解的方法，这个目前没看懂
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 

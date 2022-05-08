@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * Created by smlz on 2019/6/17.
  */
 @EnableTransactionManagement
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(basePackages = {"com.tuling"})
 public class MainConfig {
 
@@ -24,8 +24,8 @@ public class MainConfig {
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setUsername("root");
-        dataSource.setPassword("Zw726515");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/tuling-spring-trans");
+        dataSource.setPassword("root");
+        dataSource.setUrl("jdbc:mysql://192.168.56.11:3306/demo");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         return dataSource;
     }

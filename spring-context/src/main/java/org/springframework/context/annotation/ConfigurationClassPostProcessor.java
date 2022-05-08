@@ -83,6 +83,7 @@ import static org.springframework.context.annotation.AnnotationConfigUtils.CONFI
  * @author Juergen Hoeller
  * @author Phillip Webb
  * @since 3.0
+ * 配置类后置处理器
  */
 public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
 		PriorityOrdered, ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {
@@ -258,6 +259,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	/**
 	 * Build and validate a configuration model based on the registry of
 	 * {@link Configuration} classes.
+	 * 解析@Compont @Service @Controller
 	 */
 	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
 		List<BeanDefinitionHolder> configCandidates = new ArrayList<>();

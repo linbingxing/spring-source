@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class InstanceB {
-
+	@Autowired
     private InstanceA instanceA;
 
 

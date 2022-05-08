@@ -18,10 +18,10 @@ public class InstanceA  {
 	@Autowired
     private InstanceB instanceB;
 
-    @PostConstruct
-    public void init() {
-		instanceB.setInstanceA(this);
-	}
+//    @PostConstruct
+//    public void init() {
+//		instanceB.setInstanceA(this);
+//	}
 
     public InstanceB getInstanceB() {
         return instanceB;

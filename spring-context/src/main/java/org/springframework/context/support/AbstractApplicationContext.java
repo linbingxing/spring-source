@@ -516,13 +516,17 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
-			//1:准备刷新上下文环境
+			//1:准备刷新上下文环境，和主流程关系不大，就是保存了容器的启动时间，启动标志等
 			prepareRefresh();
 
 			//2:获取告诉子类初始化Bean工厂
+			//DefaultListableBeanFactory
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			//3:对bean工厂进行填充属性
+			//还是一些准备工作，添加了两个后置处理器：ApplicationContextAwareProcessor，ApplicationListenerDetector
+			//还设置了 忽略自动装配 和 允许自动装配 的接口,如果不存在某个bean的时候，spring就自动注册singleton bean
+			//还设置了bean表达式解析器 等
 			prepareBeanFactory(beanFactory);
 
 			try {

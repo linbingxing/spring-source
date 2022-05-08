@@ -33,7 +33,7 @@ public class PayServiceImpl implements PayService {
 
 		//this.updateProductStore(1);
 
-        System.out.println(1/0);
+//        System.out.println(1/0);
 
         //更新余额
         int retVal = accountInfoDao.updateAccountBlance(accountId,money);
